@@ -1,34 +1,40 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const distPath = path.resolve(__dirname, 'dist/');
-const srcPath = path.resolve(__dirname, 'src/');
+const src = {root: path.resolve(__dirname, 'src/')};
+Object.assign(src, {
+  img: path.resolve(src.root, 'img/'),
+  font: path.resolve(src.root, 'font/'),
+  ico: path.resolve(src.root, 'ico/'),
+  pug: path.resolve(src.root, 'pug/')
+});
+
+const dist = {root: path.resolve(__dirname, 'dist/')};
 
 const config = {
-  context: srcPath,
+  context: src.root,
   entry: './',
   resolve: {
     alias: {
-      Img: path.resolve(srcPath, 'img/'),
-      Font: path.resolve(srcPath, 'font/')
+      Img: src.img,
+      Font: src.font
     }
   },
   output: {
-    path: distPath,
-    filename: 'app.js'
+    path: dist.root,
+    filename: './js/app.js'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: srcPath,
+        include: src.root,
         loader: 'babel-loader'
       },
       {
         test: /\.styl$/,
-        include: srcPath,
+        include: src.root,
         use: ExtractTextPlugin.extract({
           fallback: {loader: 'style-loader', options: {sourceMap: true}},
           use: [
@@ -48,27 +54,47 @@ const config = {
       },
       {
         test: /\.(gif|png|jpe?g|svg|woff)$/,
-        include: srcPath,
-        exclude: path.resolve(srcPath, 'ico/'),
+        include: src.root,
+        exclude: src.ico,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]'
+              name: '[path][name].[ext]',
+              publicPath: '../'
             }
           }
         ]
       },
       {
         test: /\.svg$/,
-        include: path.resolve(srcPath, 'ico/'),
+        include: src.ico,
         use: ['svg-sprite-loader', 'svgo-loader']
+      },
+      {
+        test: /\.pug$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].html',
+              context: src.pug
+            }
+          },
+          {
+            loader: 'pug-html-loader',
+            options: {
+              pretty: true,
+              exports: false,
+              doctype: 'html'
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({template: './index.html'}),
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('./css/app.css')
   ]
 };
 
