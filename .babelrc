@@ -1,6 +1,8 @@
 {
   "presets": [
-    "env"
+    ["env", {
+      "useBuiltIns": "usage"
+    }]
   ],
   "plugins": [
     "transform-runtime"
