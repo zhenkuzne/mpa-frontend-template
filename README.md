@@ -1,6 +1,8 @@
 # MPA frontend template
 _Template based on webpack, pug, stylus, es6, postcss for multi page applications_
 
+[![Studio Ratio](https://pbs.twimg.com/profile_images/565814251671912449/n1WpCfuw.png)](https://studioratio.ru/)
+
 ## Prepare
 1. Install or update [Node.js](https://nodejs.org/en/);
 1. Install [Yarn](https://yarnpkg.com/lang/en/) - fast package manager (like a npm), [usage](https://yarnpkg.com/en/docs/usage);
