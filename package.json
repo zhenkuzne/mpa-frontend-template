@@ -1,14 +1,13 @@
 {
   "name": "mpa-frontend-template",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Template based on webpack, pug, stylus, es6, postcss for multi page applications",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --progress --watch --config webpack.dev.js",
     "start": "webpack-dev-server --open --config webpack.dev.js"
   },
-  "author": "",
+  "author": "Evgenii Kuznetsov <harsel1234@gmail.com> (https://github.com/evgen3)",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^7.1.5",
