@@ -12,9 +12,9 @@ _Template based on webpack, pug, stylus, es6, postcss for multi page application
 1. Clone or download project;
 1. In project folder, run `yarn` for install dependencies;
 1. Run for build:
-    * `npm run build` - build project for production (includes UglifyJSPlugin, cssnano);
-    * `npm run watch` - build and start watching for development (includes sourcemaps);
-    * `npm run start` - build, watch and local server for development (includes reload on change files).
+    * `yarn run build` - build project for production (includes UglifyJSPlugin, cssnano);
+    * `yarn run watch` - build and start watching for development (includes sourcemaps);
+    * `yarn run start` - build, watch and local server for development (includes reload on change files).
     
 ## Feedback
 For questions, bugs and enhancements use [issues](https://github.com/evgen3/mpa-frontend-template/issues).
