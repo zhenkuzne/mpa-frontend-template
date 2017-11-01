@@ -37,6 +37,7 @@ const config = {
         include: src.root,
         use: ExtractTextPlugin.extract({
           fallback: {loader: 'style-loader', options: {sourceMap: true}},
+          publicPath: '../',
           use: [
             {loader: 'css-loader', options: {sourceMap: true}},
             {
@@ -60,8 +61,7 @@ const config = {
           {
             loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]',
-              publicPath: '../'
+              name: '[path][name].[ext]'
             }
           }
         ]
@@ -94,7 +94,9 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('./css/app.css')
+    new ExtractTextPlugin({
+      filename: './css/app.css'
+    })
   ]
 };
 
