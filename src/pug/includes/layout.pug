@@ -1,0 +1,10 @@
+//- add data from global.json to global scope
+include:json-watch ../data/global.json
+- Object.assign(global, data())
+
+include require
+
+html
+  include head
+  body
+    block content

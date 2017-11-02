@@ -81,12 +81,30 @@ const config = {
               context: src.pug
             }
           },
+          'extract-loader',
+          {
+            loader: 'html-loader',
+            options: {
+              interpolate: true
+            }
+          },
           {
             loader: 'pug-html-loader',
             options: {
               pretty: true,
               exports: false,
-              doctype: 'html'
+              doctype: 'html',
+              data: {
+                data() {
+                  const data = path.resolve(src.pug, 'data/global');
+                  delete require.cache[require.resolve(data)];
+                  return require(data);
+                }
+              },
+              filters: {
+                // filter for include json data as empty string
+                'json-watch': () => ''
+              }
             }
           }
         ]

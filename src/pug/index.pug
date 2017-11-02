@@ -1,17 +1,28 @@
-extends blocks/layout
+extends includes/layout
+
+include mixins/img
+include mixins/icon
 
 block content
   .output
   .block
     button.block__button Кнопка
   input(type='text', name='')
-  a(href=jsv) adasdasd
+  a(href=JSV) adasdasd
+
   p
     | Рубль:
     span.r
-  svg
-    use(xlink:href='#twitter')
-  svg
-    use(xlink:href='#facebook')
-  svg
-    use(xlink:href='#wikipedia')
+
+  p icons
+  +icon('twitter').some-class
+  +icon('facebook').some-class
+  +icon('wikipedia').some-class
+
+  p image in mixin with require and srcset
+  +img('sample.jpg')(alt='image').some-class
+
+  p image only require
+  img(src=`${require('Img/sample.jpg')}` srcset=`${require('Img/sample@2x.jpg')} 2x` alt='')
+
+

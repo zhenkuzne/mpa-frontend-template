@@ -1,0 +1,6 @@
+mixin img(fileName)
+  - const url = `Img/${fileName}`
+  - const src = require(url)
+  - const srcset = require(url.replace(/(\.\w+$)/, '@2x$1'))
+
+  img(src=src srcset=`${srcset} 2x`)&attributes(attributes)
