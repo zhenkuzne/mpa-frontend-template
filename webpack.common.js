@@ -95,6 +95,7 @@ const config = {
               pretty: true,
               exports: false,
               doctype: 'html',
+              basedir: src.pug,
               data: {
                 data() {
                   return JSON.parse(fs.readFileSync(path.resolve(src.pug, 'data/global.json'), 'utf8'));
