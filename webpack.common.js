@@ -114,6 +114,10 @@ const config = {
   plugins: [
     new ExtractTextPlugin({
       filename: './css/app.css'
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
     })
   ]
 };
