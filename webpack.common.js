@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -96,9 +97,7 @@ const config = {
               doctype: 'html',
               data: {
                 data() {
-                  const data = path.resolve(src.pug, 'data/global');
-                  delete require.cache[require.resolve(data)];
-                  return require(data);
+                  return JSON.parse(fs.readFileSync(path.resolve(src.pug, 'data/global.json'), 'utf8'));
                 }
               },
               filters: {

@@ -8,7 +8,11 @@ block content
   .block
     button.block__button Кнопка
   input(type='text', name='')
-  a(href=JSV) adasdasd
+  a(href=$.JSV) adasdasd
+
+  ul
+    each item in $.TEST
+      li=item
 
   p
     | Рубль:
