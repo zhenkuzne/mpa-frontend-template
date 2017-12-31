@@ -1,7 +1,11 @@
 include /includes/data
 include /includes/require
 
-html
-  include /includes/head
+block variables
+
+doctype html
+html(lang='')
+  head
+    include /includes/head
   body
     block content
