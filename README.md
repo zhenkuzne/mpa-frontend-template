@@ -15,6 +15,24 @@ _Template based on webpack, pug, stylus, es6, postcss for multi page application
     * `yarn run build` - build project for production (includes UglifyJSPlugin, cssnano);
     * `yarn run watch` - build and start watching for development (includes sourcemaps);
     * `yarn run start` - build, watch and local server for development (includes reload on change files).
-    
+
+## Cookbook
+
+### Include image in template
+
+In file pug/includes/require.pug located function, usage:
+
+```pug
+img(src=`${require('Img/sample.jpg')}` srcset=`${require('Img/sample@2x.jpg')} 2x` alt='')
+.block(style=`background-image: url(${require('Img/sample.jpg')});`)
+```
+
+For short include in file pug/mixins/img.pug located mixin, usage:
+```pug
++img('sample.jpg')(alt='image').some-class
+```
+
+Attention! This mixin requires a picture in a double size (for srcset) and the link is already included `~Img/` directory.
+
 ## Feedback
 For questions, bugs and enhancements use [issues](https://github.com/evgen3/mpa-frontend-template/issues).
