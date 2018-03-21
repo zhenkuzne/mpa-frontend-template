@@ -16,7 +16,10 @@ const dist = { root: path.resolve(__dirname, 'dist/') };
 
 const config = {
   context: src.root,
-  entry: './',
+  entry: {
+    app: './',
+    assets: './assets.js'
+  },
   resolve: {
     alias: {
       Img: src.img,
@@ -24,8 +27,8 @@ const config = {
     }
   },
   output: {
-    path: dist.root,
-    filename: './js/app.js'
+    filename: './js/[name].js',
+    path: dist.root
   },
   module: {
     rules: [
