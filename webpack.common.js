@@ -62,8 +62,9 @@ const config = {
         exclude: src.ico,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
+              limit: 8192,
               name: '[path][name].[ext]'
             }
           }
