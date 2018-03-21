@@ -6,15 +6,17 @@ _Template based on webpack, pug, stylus, es6, postcss for multi page application
 ## Prepare
 1. Install or update [Node.js](https://nodejs.org/en/);
 1. Install [Yarn](https://yarnpkg.com/lang/en/) - fast package manager (like a npm), [usage](https://yarnpkg.com/en/docs/usage);
-1. Install editorconfig plugin for your editor ([PhpStorm](https://plugins.jetbrains.com/plugin/7294-editorconfig), [Sublime Text](https://packagecontrol.io/packages/EditorConfig), [Atom](https://atom.io/packages/editorconfig), [VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)) - consistent coding style between different editors and IDEs.
+1. Install editorconfig plugin for your editor ([PhpStorm](https://plugins.jetbrains.com/plugin/7294-editorconfig), [Sublime Text](https://packagecontrol.io/packages/EditorConfig), [Atom](https://atom.io/packages/linter-eslint), [VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)) - consistent coding style between different editors and IDEs;
+1. Install eslint plugin for your editor ([PhpStorm](https://www.jetbrains.com/help/phpstorm/eslint.html), [Sublime Text](https://packagecontrol.io/packages/ESLint), [Atom](https://atom.io/packages/editorconfig), [VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)) - the pluggable linting utility for JavaScript and JSX.
 
 ## Start
 1. Clone or download project;
 1. In project folder, run `yarn` for install dependencies;
 1. Run for build:
-    * `yarn run build` - build project for production (includes UglifyJSPlugin, cssnano);
-    * `yarn run watch` - build and start watching for development (includes sourcemaps);
-    * `yarn run start` - build, watch and local server for development (includes reload on change files).
+    * `yarn build` - build project for production (includes UglifyJSPlugin, cssnano);
+    * `yarn watch` - build and start watching for development (includes sourcemaps);
+    * `yarn start` - build, watch and local server for development (includes reload on change files);
+    * `yarn lint` - lint js code in src folder with airbnb rules.
 
 ## Cookbook
 
