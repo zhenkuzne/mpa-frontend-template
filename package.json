@@ -1,12 +1,12 @@
 {
   "name": "mpa-frontend-template",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Template based on webpack, pug, stylus, es6, postcss for multi page applications",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --progress --watch --config webpack.dev.js",
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "lint": "eslint --ext .js ./src"
+    "lint": "eslint ./src"
   },
   "author": "Evgenii Kuznetsov <harsel1234@gmail.com> (https://github.com/evgen3)",
   "license": "ISC",

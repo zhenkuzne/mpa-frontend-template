@@ -1,9 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
-const src = {root: path.resolve(__dirname, 'src/')};
+const src = { root: path.resolve(__dirname, 'src/') };
 Object.assign(src, {
   img: path.resolve(src.root, 'img/'),
   font: path.resolve(src.root, 'font/'),
@@ -11,7 +12,7 @@ Object.assign(src, {
   pug: path.resolve(src.root, 'pug/')
 });
 
-const dist = {root: path.resolve(__dirname, 'dist/')};
+const dist = { root: path.resolve(__dirname, 'dist/') };
 
 const config = {
   context: src.root,
@@ -37,20 +38,18 @@ const config = {
         test: /\.styl$/,
         include: src.root,
         use: ExtractTextPlugin.extract({
-          fallback: {loader: 'style-loader', options: {sourceMap: true}},
+          fallback: { loader: 'style-loader', options: { sourceMap: true } },
           publicPath: '../',
           use: [
-            {loader: 'css-loader', options: {sourceMap: true}},
+            { loader: 'css-loader', options: { sourceMap: true } },
             {
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
-                plugins: [
-                  require('autoprefixer')
-                ]
+                plugins: [autoprefixer]
               }
             },
-            {loader: 'stylus-loader', options: {sourceMap: true}}
+            { loader: 'stylus-loader', options: { sourceMap: true } }
           ]
         })
       },

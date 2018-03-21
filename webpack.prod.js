@@ -20,11 +20,11 @@ module.exports = merge(common, {
       }
     }),
     new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: {discardComments: {removeAll: true}}
+      cssProcessorOptions: { discardComments: { removeAll: true } }
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production')
       }
     })
   ]
