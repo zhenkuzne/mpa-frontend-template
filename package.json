@@ -1,11 +1,12 @@
 {
   "name": "mpa-frontend-template",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Template based on webpack, pug, stylus, es6, postcss for multi page applications",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --progress --watch --config webpack.dev.js",
-    "start": "webpack-dev-server --open --config webpack.dev.js"
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "lint": "eslint --ext .js ./src"
   },
   "author": "Evgenii Kuznetsov <harsel1234@gmail.com> (https://github.com/evgen3)",
   "license": "ISC",
@@ -17,6 +18,9 @@
     "babel-preset-env": "2.0.0-beta.2",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
+    "eslint": "^4.19.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "extract-loader": "^1.0.1",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",

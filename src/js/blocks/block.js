@@ -4,9 +4,8 @@ export default class Block {
   }
 
   showMessage() {
-    let message = 'from showMessage in Block!';
+    const message = 'from showMessage in Block!';
 
     this.$field.text(message);
-    console.log(message);
   }
 }

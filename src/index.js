@@ -1,7 +1,7 @@
-import './js/main.js';
+import './js/main';
 import './styl/main.styl';
 
-let requireAll = r => r.keys().forEach(r);
+const requireAll = r => r.keys().forEach(r);
 
 // подключение svg-спрайтов
 requireAll(require.context('./ico/', true, /\.svg$/));

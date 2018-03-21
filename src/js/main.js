@@ -1,10 +1,10 @@
 import $ from 'jquery';
 import Block from './blocks/block';
 
-let block = new Block({$field: $('.output')});
+const block = new Block({ $field: $('.output') });
 block.showMessage();
 
-let test = {};
+const test = {};
 
 Object.assign(test, {
   key: 'value'
