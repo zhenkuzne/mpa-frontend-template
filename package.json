@@ -1,6 +1,6 @@
 {
   "name": "mpa-frontend-template",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Template based on webpack, pug, stylus, es6, postcss for multi page applications",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
@@ -39,7 +39,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "jquery": "^3.2.1",
+    "jquery": "^3.3.1",
     "normalize.css": "^7.0.0"
   }
 }
