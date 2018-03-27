@@ -57,8 +57,7 @@ const config = {
         })
       },
       {
-        test: /\.(gif|png|jpe?g|svg|woff)$/,
-        include: src.root,
+        test: /\.(gif|png|jpe?g|svg|woff|eot|ttf|woff2)$/,
         exclude: src.ico,
         use: [
           {
