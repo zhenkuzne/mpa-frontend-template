@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 
 const src = { root: path.resolve(__dirname, 'src/') };
@@ -40,21 +40,18 @@ const config = {
       {
         test: /\.styl$/,
         include: src.root,
-        use: ExtractTextPlugin.extract({
-          fallback: { loader: 'style-loader', options: { sourceMap: true } },
-          publicPath: '../',
-          use: [
-            { loader: 'css-loader', options: { sourceMap: true } },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: [autoprefixer]
-              }
-            },
-            { loader: 'stylus-loader', options: { sourceMap: true } }
-          ]
-        })
+        use: [
+          { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              plugins: [autoprefixer]
+            }
+          },
+          { loader: 'stylus-loader', options: { sourceMap: true } }
+        ]
       },
       {
         test: /\.(gif|png|jpe?g|svg|woff|eot|ttf|woff2)$/,
@@ -85,12 +82,7 @@ const config = {
             }
           },
           'extract-loader',
-          {
-            loader: 'html-loader',
-            options: {
-              interpolate: true
-            }
-          },
+          { loader: 'html-loader', options: { interpolate: true } },
           {
             loader: 'pug-html-loader',
             options: {
@@ -99,9 +91,7 @@ const config = {
               doctype: 'html',
               basedir: src.pug,
               data: {
-                data() {
-                  return JSON.parse(fs.readFileSync(path.resolve(src.pug, 'data/global.json'), 'utf8'));
-                }
+                data: () => JSON.parse(fs.readFileSync(path.resolve(src.pug, 'data/global.json'), 'utf8'))
               },
               filters: {
                 // filter for include json data as empty string
@@ -114,9 +104,7 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: './css/app.css'
-    }),
+    new MiniCssExtractPlugin({ filename: './css/app.css' }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
