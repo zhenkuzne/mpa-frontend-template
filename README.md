@@ -1,5 +1,5 @@
 # MPA frontend template
-_Template based on webpack, pug, stylus, es6, postcss for multi page applications_
+_Template based on webpack, pug, scss, es6, postcss for multi page applications_
 
 [![Studio Ratio](https://pbs.twimg.com/profile_images/565814251671912449/n1WpCfuw.png)](https://studioratio.ru/)
 

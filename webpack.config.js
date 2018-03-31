@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const src = { root: path.resolve(__dirname, 'src/') };
@@ -38,20 +38,23 @@ const config = {
         loader: 'babel-loader'
       },
       {
-        test: /\.styl$/,
+        test: /\.scss$/,
         include: src.root,
-        use: [
-          { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
-          { loader: 'css-loader', options: { sourceMap: true } },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-              plugins: [autoprefixer]
-            }
-          },
-          { loader: 'stylus-loader', options: { sourceMap: true } }
-        ]
+        use: ExtractTextPlugin.extract({
+          fallback: { loader: 'style-loader', options: { sourceMap: true } },
+          publicPath: '../',
+          use: [
+            { loader: 'css-loader', options: { sourceMap: true } },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+                plugins: [autoprefixer]
+              }
+            },
+            { loader: 'sass-loader', options: { sourceMap: true } }
+          ]
+        })
       },
       {
         test: /\.(gif|png|jpe?g|svg|woff|eot|ttf|woff2)$/,
@@ -104,7 +107,7 @@ const config = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: './css/app.css' }),
+    new ExtractTextPlugin({ filename: './css/app.css' }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
