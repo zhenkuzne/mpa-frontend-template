@@ -1,17 +1,6 @@
 @import '~normalize.css';
+
 @import 'other/media';
 @import 'other/font';
+
 @import 'blocks/r';
-@import 'blocks/block';
-
-.block {
-  background-color: green;
-  display: flex;
-  flex-direction: row-reverse;
-
-  @include mobile {
-    &__button {
-      font-size: 48px;
-    }
-  }
-}
