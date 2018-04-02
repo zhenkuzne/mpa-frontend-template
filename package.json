@@ -9,7 +9,7 @@
     "lint": "eslint ./src"
   },
   "author": "Evgenii Kuznetsov <harsel1234@gmail.com> (https://github.com/evgen3)",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^8.2.0",
     "babel-core": "7.0.0-beta.2",
