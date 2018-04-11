@@ -1,18 +1,24 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const src = { root: path.resolve(__dirname, 'src/') };
+const src = {
+  root: path.resolve(__dirname, 'src/')
+};
 Object.assign(src, {
   img: path.resolve(src.root, 'img/'),
   font: path.resolve(src.root, 'font/'),
   ico: path.resolve(src.root, 'ico/'),
-  pug: path.resolve(src.root, 'pug/')
+  pug: path.resolve(src.root, 'pug/'),
+  static: path.resolve(src.root, 'static/')
 });
 
-const dist = { root: path.resolve(__dirname, 'dist/') };
+const dist = {
+  root: path.resolve(__dirname, 'dist/')
+};
 
 const config = {
   context: src.root,
@@ -41,10 +47,20 @@ const config = {
         test: /\.scss$/,
         include: src.root,
         use: ExtractTextPlugin.extract({
-          fallback: { loader: 'style-loader', options: { sourceMap: true } },
+          fallback: {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true
+            }
+          },
           publicPath: '../',
           use: [
-            { loader: 'css-loader', options: { sourceMap: true } },
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
             {
               loader: 'postcss-loader',
               options: {
@@ -52,22 +68,25 @@ const config = {
                 plugins: [autoprefixer]
               }
             },
-            { loader: 'sass-loader', options: { sourceMap: true } }
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
           ]
         })
       },
       {
         test: /\.(gif|png|jpe?g|svg|woff|eot|ttf|woff2)$/,
         exclude: src.ico,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: '[path][name].[ext]'
-            }
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: '[path][name].[ext]'
           }
-        ]
+        }]
       },
       {
         test: /\.svg$/,
@@ -85,7 +104,12 @@ const config = {
             }
           },
           'extract-loader',
-          { loader: 'html-loader', options: { interpolate: true } },
+          {
+            loader: 'html-loader',
+            options: {
+              attrs: ['']
+            }
+          },
           {
             loader: 'pug-html-loader',
             options: {
@@ -107,11 +131,17 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin({ filename: './css/app.css' }),
+    new ExtractTextPlugin({
+      filename: './css/app.css'
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: src.static,
+      to: dist.root
+    }])
   ]
 };
 

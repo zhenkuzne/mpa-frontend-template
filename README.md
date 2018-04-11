@@ -38,8 +38,8 @@ _Template based on webpack, pug, scss, es6, postcss for multi page applications_
 In file pug/includes/require.pug located function, usage:
 
 ```pug
-img(src=`${require('Img/sample.jpg')}` srcset=`${require('Img/sample@2x.jpg')} 2x` alt='')
-.block(style=`background-image: url(${require('Img/sample.jpg')});`)
+img(src='upload/sample.jpg' srcset=`upload/sample@2x.jpg 2x` alt='')
+.block(style='background-image: url(upload/sample.jpg);')
 ```
 
 For short include in file pug/mixins/img.pug located mixin, usage:
@@ -47,7 +47,7 @@ For short include in file pug/mixins/img.pug located mixin, usage:
 +img('sample.jpg')(alt='image').some-class
 ```
 
-Attention! This mixin requires a picture in a double size (for srcset) and the link is already included `~Img/` directory.
+Attention! This mixin requires a picture in a double size (for srcset) and the link is already included `upload/` directory.
 
 ## Feedback
 For questions, bugs and enhancements use [issues](https://github.com/evgen3/mpa-frontend-template/issues).

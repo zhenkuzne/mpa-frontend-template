@@ -6,7 +6,11 @@ module.exports = merge(common, {
   mode: 'production',
   plugins: [
     new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: { discardComments: { removeAll: true } }
+      cssProcessorOptions: {
+        discardComments: {
+          removeAll: true
+        }
+      }
     })
   ]
 });
