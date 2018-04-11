@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const common = require('./webpack.config.js');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = merge(common, {
   mode: 'production',
@@ -11,6 +12,9 @@ module.exports = merge(common, {
           removeAll: true
         }
       }
+    }),
+    new ImageminPlugin({
+      test: /\.(gif|png|jpe?g)$/
     })
   ]
 });
