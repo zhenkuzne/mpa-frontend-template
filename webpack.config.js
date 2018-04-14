@@ -2,8 +2,14 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const IfPlugin = require('if-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const src = {
   root: path.resolve(__dirname, 'src/')
@@ -20,8 +26,9 @@ const dist = {
   root: path.resolve(__dirname, 'dist/')
 };
 
-const config = {
+module.exports = (env, argv) => ({
   context: src.root,
+  devtool: 'inline-source-map',
   entry: {
     app: './',
     assets: './assets.js'
@@ -46,36 +53,28 @@ const config = {
       {
         test: /\.scss$/,
         include: src.root,
-        use: ExtractTextPlugin.extract({
-          fallback: {
-            loader: 'style-loader',
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
             options: {
               sourceMap: true
             }
           },
-          publicPath: '../',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: [autoprefixer]
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              plugins: [autoprefixer]
             }
-          ]
-        })
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
       {
         test: /\.(gif|png|jpe?g|svg|woff|eot|ttf|woff2)$/,
@@ -130,8 +129,17 @@ const config = {
       }
     ]
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   plugins: [
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: './css/app.css'
     }),
     new webpack.ProvidePlugin({
@@ -141,8 +149,25 @@ const config = {
     new CopyWebpackPlugin([{
       from: src.static,
       to: dist.root
-    }])
+    }]),
+    new CleanWebpackPlugin(dist.root),
+    new IfPlugin(
+      env === 'server',
+      new BrowserSyncPlugin({
+        host: 'localhost',
+        port: 3000,
+        server: {
+          baseDir: [dist.root]
+        }
+      }, {
+        injectCss: true
+      })
+    ),
+    new IfPlugin(
+      argv.mode === 'production',
+      new ImageminPlugin({
+        test: /\.(gif|png|jpe?g)$/
+      })
+    )
   ]
-};
-
-module.exports = config;
+});
