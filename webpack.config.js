@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const IfPlugin = require('if-webpack-plugin');
@@ -11,48 +12,38 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
-const src = {
-  root: path.resolve(__dirname, 'src/')
-};
-Object.assign(src, {
-  img: path.resolve(src.root, 'img/'),
-  font: path.resolve(src.root, 'font/'),
-  ico: path.resolve(src.root, 'ico/'),
-  pug: path.resolve(src.root, 'pug/'),
-  static: path.resolve(src.root, 'static/')
-});
+const src = path.resolve(__dirname, 'src/');
+const dist = path.resolve(__dirname, 'dist/');
 
-const dist = {
-  root: path.resolve(__dirname, 'dist/')
-};
+const ico = path.resolve(src, 'ico/');
+const staticPath = path.resolve(src, 'static/');
 
-module.exports = (env, argv) => ({
-  context: src.root,
+const pug = path.resolve(src, 'pug/');
+const pugGlobals = path.resolve(pug, 'data/global.json');
+
+module.exports = env => ({
+  context: src,
   devtool: 'inline-source-map',
+  resolve: {
+    modules: [src, 'node_modules']
+  },
   entry: {
     app: './',
     assets: './assets.js'
   },
-  resolve: {
-    alias: {
-      Img: src.img,
-      Font: src.font
-    }
-  },
   output: {
     filename: './js/[name].js',
-    path: dist.root
+    path: dist
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: src.root,
+        exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {
         test: /\.scss$/,
-        include: src.root,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -78,7 +69,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.(gif|png|jpe?g|svg|woff|eot|ttf|woff2)$/,
-        exclude: src.ico,
+        exclude: ico,
         use: [{
           loader: 'url-loader',
           options: {
@@ -89,17 +80,18 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.svg$/,
-        include: src.ico,
+        include: ico,
         use: ['svg-sprite-loader', 'svgo-loader']
       },
       {
         test: /\.pug$/,
+        include: pug,
         use: [
           {
             loader: 'file-loader',
             options: {
               name: '[path][name].html',
-              context: src.pug
+              context: pug
             }
           },
           'extract-loader',
@@ -115,9 +107,9 @@ module.exports = (env, argv) => ({
               pretty: true,
               exports: false,
               doctype: 'html',
-              basedir: src.pug,
+              basedir: pug,
               data: {
-                data: () => JSON.parse(fs.readFileSync(path.resolve(src.pug, 'data/global.json'), 'utf8'))
+                data: () => JSON.parse(fs.readFileSync(pugGlobals, 'utf8'))
               },
               filters: {
                 // filter for include json data as empty string
@@ -135,7 +127,10 @@ module.exports = (env, argv) => ({
         cache: true,
         parallel: true
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({}),
+      new ImageminPlugin({
+        test: /\.(gif|png|jpe?g)$/
+      })
     ]
   },
   plugins: [
@@ -147,26 +142,20 @@ module.exports = (env, argv) => ({
       jQuery: 'jquery'
     }),
     new CopyWebpackPlugin([{
-      from: src.static,
-      to: dist.root
+      from: staticPath,
+      to: dist
     }]),
-    new CleanWebpackPlugin(dist.root),
+    new CleanWebpackPlugin(dist),
     new IfPlugin(
       env === 'server',
       new BrowserSyncPlugin({
         host: 'localhost',
         port: 3000,
         server: {
-          baseDir: [dist.root]
+          baseDir: [dist]
         }
       }, {
         injectCss: true
-      })
-    ),
-    new IfPlugin(
-      argv.mode === 'production',
-      new ImageminPlugin({
-        test: /\.(gif|png|jpe?g)$/
       })
     )
   ]

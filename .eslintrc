@@ -9,8 +9,9 @@
   ],
   "globals": {
     "$": true,
-    "jQuery": true,
-    "ymaps": true,
-    "BX": true
+    "jQuery": true
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
