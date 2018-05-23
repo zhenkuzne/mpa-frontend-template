@@ -3,7 +3,8 @@ _Simple template based on webpack, pug, stylus, es6, postcss for multi page appl
 
 [![Studio Ratio](https://pbs.twimg.com/profile_images/565814251671912449/n1WpCfuw.png)](https://studioratio.ru/)
 
-See examples in [demo](https://github.com/evgen3/mpa-frontend-template/tree/demo) branch.
+## Feedback
+For questions, bugs and enhancements use [issues](https://github.com/evgen3/mpa-frontend-template/issues).
 
 ## Prepare
 ### Required
@@ -92,6 +93,3 @@ Import in the file in which you need the dependency:
 ```js
 import Swiper from 'swiper/dist/js/swiper';
 ```
-
-## Feedback
-For questions, bugs and enhancements use [issues](https://github.com/evgen3/mpa-frontend-template/issues).
