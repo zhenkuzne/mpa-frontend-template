@@ -105,3 +105,18 @@ JS:
 ```
 import module from '@/js/module';
 ```
+
+### Using svg-sprite
+Put the icon in ```/ico``` folder
+
+And add code in your template:
+```html
+<svg class="your-class" width="193" height="40">
+  <use xlink:href="#your-icon-file-name"></use>
+</svg>
+```
+
+Or you can use pug-mixin:
+```pug
++icon('your-icon-file-name')(width=193 height=40).your-class
+```
