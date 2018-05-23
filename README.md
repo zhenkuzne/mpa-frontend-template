@@ -1,5 +1,5 @@
 # MPA frontend template
-_Simple template based on webpack, pug, scss, es6, postcss for multi page applications_
+_Simple template based on webpack, pug, stylus, es6, postcss for multi page applications_
 
 [![Studio Ratio](https://pbs.twimg.com/profile_images/565814251671912449/n1WpCfuw.png)](https://studioratio.ru/)
 
@@ -60,12 +60,12 @@ Install dependency (for example, swiper):
 yarn add swiper
 ```
 
-Import dependency in main.scss once:
-```scss
-@import '~swiper/dist/css/swiper.css';
+Import dependency in main.styl once:
+```
+@require '~swiper/dist/css/swiper.css'
 ```
 
-Symbol ```~``` in scss points to a node_modules folder.
+Symbol ```~``` in styl points to a node_modules folder.
 
 #### JS
 

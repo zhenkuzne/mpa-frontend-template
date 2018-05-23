@@ -25,7 +25,9 @@ module.exports = env => ({
   context: src,
   devtool: 'inline-source-map',
   resolve: {
-    modules: [src, 'node_modules']
+    alias: {
+      '@': src
+    }
   },
   entry: {
     app: './',
@@ -43,9 +45,14 @@ module.exports = env => ({
         loader: 'babel-loader'
       },
       {
-        test: /\.scss$/,
+        test: /\.styl$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -60,7 +67,7 @@ module.exports = env => ({
             }
           },
           {
-            loader: 'sass-loader',
+            loader: 'stylus-loader',
             options: {
               sourceMap: true
             }
@@ -151,6 +158,7 @@ module.exports = env => ({
       new BrowserSyncPlugin({
         host: 'localhost',
         port: 3000,
+        ghostMode: false,
         server: {
           baseDir: [dist]
         }
