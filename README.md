@@ -93,3 +93,15 @@ Import in the file in which you need the dependency:
 ```js
 import Swiper from 'swiper/dist/js/swiper';
 ```
+
+### Alias @ in stylus and js
+
+@ in path points to src folder, with it you can create an absolute path.
+CSS:
+```
+src: url("~@/font/rouble-webfont.woff") format("woff")
+```
+JS:
+```
+import module from '@/js/module';
+```
