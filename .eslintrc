@@ -7,11 +7,11 @@
   "extends": [
     "airbnb-base"
   ],
-  "globals": {
-    "$": true,
-    "jQuery": true
-  },
   "settings": {
     "import/resolver": "webpack"
+  },
+  "env": {
+    "browser": true,
+    "node": true
   }
 }
