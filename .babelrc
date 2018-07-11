@@ -1,7 +1,3 @@
 {
-  "presets": [
-    ["env", {
-      "useBuiltIns": "usage"
-    }]
-  ]
+  "presets": ["env"]
 }
