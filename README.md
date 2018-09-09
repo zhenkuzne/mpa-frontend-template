@@ -1,7 +1,7 @@
 # MPA frontend template
 _Simple template based on webpack, pug, stylus, es6, postcss for multi page applications_
 
-[![Studio Ratio](https://pbs.twimg.com/profile_images/565814251671912449/n1WpCfuw.png)](https://studioratio.ru/)
+![MPA Frontend Template banner](https://user-images.githubusercontent.com/12950683/45268426-24778080-b48d-11e8-8e32-8d06fe51c3fc.png)
 
 ## Feedback
 For questions, bugs and enhancements use [issues](https://github.com/evgen3/mpa-frontend-template/issues).
