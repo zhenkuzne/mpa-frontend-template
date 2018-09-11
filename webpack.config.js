@@ -10,7 +10,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const src = path.resolve(__dirname, 'src/');
 const dist = path.resolve(__dirname, 'dist/');
@@ -134,10 +133,7 @@ module.exports = env => ({
         cache: true,
         parallel: true
       }),
-      new OptimizeCSSAssetsPlugin({}),
-      new ImageminPlugin({
-        test: /\.(gif|png|jpe?g)$/
-      })
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [

@@ -1,6 +1,6 @@
 {
   "name": "mpa-frontend-template",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Template based on webpack, pug, stylus, es6, postcss for multi page applications",
   "scripts": {
     "build": "webpack --mode production",
@@ -28,7 +28,6 @@
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.5",
     "if-webpack-plugin": "^1.0.5",
-    "imagemin-webpack-plugin": "^2.1.1",
     "mini-css-extract-plugin": "^0.4.0",
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "postcss-loader": "^2.1.3",
