@@ -1,6 +1,6 @@
 {
   "name": "mpa-frontend-template",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Template based on webpack, pug, stylus, es6, postcss for multi page applications",
   "scripts": {
     "build": "webpack --mode production",
