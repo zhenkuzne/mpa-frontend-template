@@ -10,6 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 
 const src = path.resolve(__dirname, 'src/');
 const dist = path.resolve(__dirname, 'dist/');
@@ -29,7 +30,8 @@ module.exports = env => ({
     }
   },
   entry: {
-    app: './',
+    app: './js/main.js',
+    styles: './styl/main.styl',
     assets: './assets.js'
   },
   output: {
@@ -137,6 +139,9 @@ module.exports = env => ({
     ]
   },
   plugins: [
+    new FixStyleOnlyEntriesPlugin({
+      extensions: ['styl', 'css']
+    }),
     new MiniCssExtractPlugin({
       filename: './css/app.css'
     }),
