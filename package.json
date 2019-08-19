@@ -40,7 +40,7 @@
     "uglifyjs-webpack-plugin": "^1.2.4",
     "url-loader": "^1.0.1",
     "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.13",
+    "webpack-cli": "^3.3.7",
     "webpack-fix-style-only-entries": "^0.0.4"
   },
   "dependencies": {
