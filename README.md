@@ -1,4 +1,4 @@
-# MPA frontend template
+# MPA frontend template (slightly modified)
 _Simple template based on webpack, pug, stylus, es6, postcss for multi page applications_
 
 ![MPA Frontend Template banner](https://user-images.githubusercontent.com/12950683/45268426-24778080-b48d-11e8-8e32-8d06fe51c3fc.png)
@@ -29,10 +29,16 @@ For questions, bugs and enhancements use [issues](https://github.com/evgen3/mpa-
     yarn
     ```
 1. Use build commands:
-    * `yarn build` - build project for production (includes UglifyJSPlugin, cssnano);
-    * `yarn watch` - build and start watching for development (includes sourcemaps);
     * `yarn start` - build, watch and local server for development (includes reload on change files);
+    * `yarn build` - build project for production (includes UglifyJSPlugin, cssnano) and publish (gh-pages);
+    * `yarn eslint` - eslint --fix.
+    * `yarn stylelint` - stylelint *.scss --fix.
+    * `yarn precommit` - npm run eslint && npm run stylelint.
+    * `yarn gh-pages` - publish (gh-pages).
+    * `yarn watch` - build and start watching for development (includes sourcemaps);
     * `yarn lint` - lint js code in src folder with airbnb rules.
+
+Added hook "pre-commit": "npm run precommit"
 
 ## Cookbook
 
