@@ -12,6 +12,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 const src = path.resolve(__dirname, 'src/');
 const dist = path.resolve(__dirname, 'dist/');
@@ -43,7 +44,7 @@ module.exports = env => ({
     rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: ["babel-loader", "eslint-loader"]
       },
       {
         test: /\.s[ac]ss$/i,
@@ -106,6 +107,7 @@ module.exports = env => ({
     ]
   },
   plugins: [
+    new StylelintPlugin(),
     new FixStyleOnlyEntriesPlugin(),
     new MiniCssExtractPlugin({
       filename: './css/app.css'
