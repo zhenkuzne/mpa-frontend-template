@@ -11,6 +11,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 const src = path.resolve(__dirname, 'src/');
 const dist = path.resolve(__dirname, 'dist/');
@@ -18,8 +19,8 @@ const dist = path.resolve(__dirname, 'dist/');
 const ico = path.resolve(src, 'ico/');
 const staticPath = path.resolve(src, 'static/');
 
-const pug = path.resolve(src, 'pug/');
-const pugGlobals = path.resolve(pug, 'data/global.json');
+const pug = path.resolve(src, 'pug/pages/');
+const pages = fs.readdirSync(pug).filter(fileName => fileName.endsWith('.pug'))
 
 module.exports = env => ({
   context: src,
@@ -31,7 +32,7 @@ module.exports = env => ({
   },
   entry: {
     app: './js/main.js',
-    styles: './styl/main.styl',
+    styles: './style/main.scss',
     assets: './assets.js'
   },
   output: {
@@ -39,26 +40,21 @@ module.exports = env => ({
     path: dist
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {
-        test: /\.styl$/,
+        test: /\.s[ac]ss$/i,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../'
-            }
-          },
+          // fallback to style-loader in development
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
             loader: 'postcss-loader',
@@ -68,12 +64,12 @@ module.exports = env => ({
             }
           },
           {
-            loader: 'stylus-loader',
+            loader: 'sass-loader',
             options: {
-              sourceMap: true
-            }
-          }
-        ]
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(gif|png|jpe?g|svg|woff|eot|ttf|woff2)$/,
@@ -81,6 +77,7 @@ module.exports = env => ({
         use: [{
           loader: 'url-loader',
           options: {
+            esModule: false,
             limit: 8192,
             name: '[path][name].[ext]'
           }
@@ -93,39 +90,9 @@ module.exports = env => ({
       },
       {
         test: /\.pug$/,
-        include: pug,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].html',
-              context: pug
-            }
-          },
-          'extract-loader',
-          {
-            loader: 'html-loader',
-            options: {
-              attrs: ['']
-            }
-          },
-          {
-            loader: 'pug-html-loader',
-            options: {
-              pretty: true,
-              exports: false,
-              doctype: 'html',
-              basedir: pug,
-              data: {
-                data: () => JSON.parse(fs.readFileSync(pugGlobals, 'utf8'))
-              },
-              filters: {
-                // filter for include json data as empty string
-                'json-watch': () => ''
-              }
-            }
-          }
-        ]
+        loaders: [{
+          loader: "pug-loader"
+        }],
       }
     ]
   },
@@ -139,16 +106,9 @@ module.exports = env => ({
     ]
   },
   plugins: [
-    new FixStyleOnlyEntriesPlugin({
-      extensions: ['styl', 'css']
-    }),
+    new FixStyleOnlyEntriesPlugin(),
     new MiniCssExtractPlugin({
       filename: './css/app.css'
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
     }),
     new CopyWebpackPlugin([{
       from: staticPath,
@@ -167,6 +127,10 @@ module.exports = env => ({
       }, {
         injectCss: true
       })
-    )
+    ),
+    ...pages.map(page => new HtmlWebpackPlugin({
+      template: `${pug}/${page}`,
+      filename: `./${page.replace(/\.pug/,'.html')}`
+    }))
   ]
 });

@@ -68,32 +68,6 @@ Import dependency in main.styl once:
 
 Symbol ```~``` in styl points to a node_modules folder.
 
-#### JS
-
-##### jQuery plugins
-
-Install dependency (for example, sticky-kit):
-```
-yarn add sticky-kit
-```
-
-Import dependency in main.js once:
-```js
-import 'sticky-kit/dist/sticky-kit';
-```
-
-##### Other libraries
-
-Install dependency (for example, swiper):
-```
-yarn add swiper
-```
-
-Import in the file in which you need the dependency:
-```js
-import Swiper from 'swiper/dist/js/swiper';
-```
-
 ### Alias @ in stylus and js
 
 @ in path points to src folder, with it you can create an absolute path.
