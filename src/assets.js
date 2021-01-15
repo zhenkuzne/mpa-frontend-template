@@ -1,6 +1,7 @@
-const requireAll = r => r.keys().forEach(r);
+/* eslint-disable no-undef */
+const requireAll = r => r.keys().forEach(r)
 
 // include svg-sprite
-requireAll(require.context('./ico/', true, /\.svg$/));
+requireAll(require.context('./ico/', true, /\.svg$/))
 // include pug-templates
-requireAll(require.context('./pug/', false, /\.pug$/));
+requireAll(require.context('./pug/', false, /\.pug$/))

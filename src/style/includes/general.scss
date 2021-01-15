@@ -1,0 +1,45 @@
+// Основные стили проекта
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  min-width: 320px;
+  -webkit-text-size-adjust: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --webkittouch-callout: none; // iOS Safari
+}
+
+.d-none {
+  display: none;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.show {
+  --display: block;
+
+  display: var(--display);
+}
+
+.hide {
+  --display: none;
+
+  display: var(--display);
+}
+
+.spoiler {
+  --transition: height .3s ease-out;
+
+  overflow: hidden;
+  transition: var(--transition);
+  height: auto;
+}

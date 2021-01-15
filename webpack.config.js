@@ -1,38 +1,41 @@
-const path = require('path');
-const fs = require('fs');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+const path = require('path')
+const fs = require('fs')
+const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const IfPlugin = require('if-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const IfPlugin = require('if-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const StylelintPlugin = require('stylelint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
-const src = path.resolve(__dirname, 'src/');
-const dist = path.resolve(__dirname, 'dist/');
+const src = path.resolve(__dirname, 'src/')
+const dist = path.resolve(__dirname, 'dist/')
 
-const ico = path.resolve(src, 'ico/');
-const staticPath = path.resolve(src, 'static/');
+const ico = path.resolve(src, 'ico/')
+const staticPath = path.resolve(src, 'static/')
 
-const pug = path.resolve(src, 'pug/pages/');
+const pug = path.resolve(src, 'pug/pages/')
 const pages = fs.readdirSync(pug).filter(fileName => fileName.endsWith('.pug'))
 
 module.exports = env => ({
   context: src,
   devtool: 'inline-source-map',
   resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
     alias: {
       '@': src
     }
   },
   entry: {
-    app: './js/main.js',
+    app: './js/main.ts',
     styles: './style/main.scss',
     assets: './assets.js'
   },
@@ -41,10 +44,16 @@ module.exports = env => ({
     path: dist
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ["babel-loader", "eslint-loader"]
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: ["babel-loader", "ts-loader"]
       },
       {
         test: /\.s[ac]ss$/i,
@@ -101,7 +110,8 @@ module.exports = env => ({
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
-        parallel: true
+        parallel: true,
+        sourceMap: true,
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
@@ -135,4 +145,4 @@ module.exports = env => ({
       filename: `./${page.replace(/\.pug/,'.html')}`
     }))
   ]
-});
+})
