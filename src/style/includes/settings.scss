@@ -1,12 +1,16 @@
 
 //Основной размер шрифта. Без надобности не менять. Все шрифты переведены в rem. В файле variable-fonts.scss создан миксин, который преобразует px в rem
-$font-size: 16; // было 16
+$html-font-size: 16;
 
 html {
-  font-size: $font-size + px;
+  // font-size: $html-font-size + px;
 }
 
-//Миксин для преобразования шрифта в rem. Задаётся в px
-@mixin font-size($main-font-size) {
-  font-size: ($main-font-size/$font-size) + rem;
-}
+// Шрифты
+// $font-family: 'Roboto',
+//   'Helvetica',
+//   'Arial',
+//   sans-serif;
+
+// Путь к директории изображений для подключения через scss
+$image_dir: '../images/';

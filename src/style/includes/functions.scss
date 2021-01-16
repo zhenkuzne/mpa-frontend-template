@@ -1,0 +1,15 @@
+// functions
+
+// переводит значение px в rem
+// пример:
+// .tmp { font-size: rem(18) }
+@function rem($pxSize) {
+  @return #{$pxSize / $html-font-size}rem;
+}
+
+// переводит значение px в em
+// пример:
+// .tmp { font-size: em(18, 16) }
+@function em($pxSize, $context: $html-font-size) {
+  @return #{$pxSize/$context}em;
+}

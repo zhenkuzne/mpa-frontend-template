@@ -1,0 +1,86 @@
+// initial_parameters
+
+body {
+  // font: 16px/1.5 $font-family;
+  // color: $main-black;
+  -webkit-text-size-adjust: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+hr {
+  --height: 1px;
+  --color: #000;
+
+  color: var(--color); // для IE
+  background-color: var(--color); // для Firefox, Opera, Safari
+  border: 0 none;
+  height: var(--height); // для IE, Firefox, Opera, Safari
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  padding-left: 0;
+
+  li {
+    list-style-type: none;
+  }
+}
+
+fieldset {
+  padding: 0;
+  border: 0 none;
+  margin: 0;
+}
+
+input,
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  // caret-color: $link-color-hover;
+}
+
+//убрать стрелки
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+textarea {
+  resize: none;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration,
+input::-ms-clear {
+  -webkit-appearance: none;
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
+
+// иконка календаря
+// input[type="date"]::-webkit-calendar-picker-indicator {
+//   background: none;
+//   opacity: 0;
+//   height: 100%;
+//   width: 48px;
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+// }

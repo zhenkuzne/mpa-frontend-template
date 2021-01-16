@@ -43,3 +43,33 @@ body {
   transition: var(--transition);
   height: auto;
 }
+
+// *** Скрыть скроллбар
+
+.hide-scrollbar {
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+    display: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+}
+
+// .table {
+//   width: 100%;
+//   overflow: auto;
+//   -webkit-overflow-scrolling: touch;
+// }

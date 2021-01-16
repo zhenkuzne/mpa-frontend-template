@@ -1,0 +1,7 @@
+// mixins
+
+// Фоновое изображение
+// @include backgroundImage('name.png');
+@mixin backgroundImage($imageNameWhisExtension, $imagePath:  $image_dir) {
+  background-image: url($imagePath + $imageNameWhisExtension);
+}

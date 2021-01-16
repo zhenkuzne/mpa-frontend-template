@@ -1,25 +1,25 @@
 // typography
 
 h1 {
-  @include font-size(24);
+  font-size: rem(24);
 }
 
 h2 {
-  @include font-size(22);
+  font-size: rem(22);
 }
 
 h3 {
-  @include font-size(18);
+  font-size: rem(18);
 }
 
 h4 {
-  @include font-size(16);
+  font-size: rem(16);
 }
 
 h5 {
-  @include font-size(12);
+  font-size: rem(12);
 }
 
 h6 {
-  @include font-size(10);
+  font-size: rem(10);
 }

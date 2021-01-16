@@ -1,5 +1,35 @@
 @charset 'UTF-8';
 
 @import './includes/general';
+@import './includes/functions';
+@import './includes/mixins';
 @import './includes/settings';
 @import './includes/typography';
+@import './includes/initial_parameters.scss';
+
+
+/*
+Шпаргалка
+***********
+@include media-breakpoint-up(sm) {}
+@include media-breakpoint-up(md) {}
+@include media-breakpoint-up(lg) {}
+@include media-breakpoint-up(xl) {}
+*** ***
+@include media-breakpoint-up(sm)
+@include media-breakpoint-down(sm)
+@include media-breakpoint-only(sm)
+@include media-breakpoint-between(sm, md)
+
+************
+font-weight
+100	- Thin (Hairline) - Тонкий (Волосяной)
+200	- Extra Light (Ultra Light) - Дополнительный светлый (Сверхсветлый)
+300	- Light - Светлый
+400	- Normal - Нормальный
+500	- Medium - Средний
+600	- Semi Bold (Demi Bold) - Полужирный
+700	- Bold Жирный
+800	- Extra Bold (Ultra Bold) - Дополнительный жирный (Сверхжирный)
+900	- Black (Heavy) - Черный (Густой)
+*/
